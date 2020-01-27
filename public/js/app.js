@@ -80780,8 +80780,8 @@ function (_Component) {
   _createClass(Message, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      Echo.channel('message-received').listen('SendMessage', function () {
-        console.log('A outra pagina foi carregada');
+      Echo.channel('message-received').listen('SendMessage', function (e) {
+        console.log(e);
       });
     }
   }, {

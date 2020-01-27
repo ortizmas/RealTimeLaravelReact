@@ -8,8 +8,8 @@ class Message extends Component {
 
     componentDidMount() {
         Echo.channel('message-received')
-            .listen('SendMessage', () => {
-                console.log('A outra pagina foi carregada');
+            .listen('SendMessage', (e) => {
+                console.log(e);
             });
     }
 
