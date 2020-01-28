@@ -19,6 +19,10 @@ Route::middleware('auth')->group( function () {
     Route::get('/', function () {
         return view('welcome');
     });
+    Route::get('/blog', function () {
+        return view('blog');
+    });
+
 
     Route::get('/messages', function () {
         $users = \App\User::get();

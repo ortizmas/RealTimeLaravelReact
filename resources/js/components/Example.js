@@ -4,12 +4,14 @@ import ReactDOM from 'react-dom';
 import Message from './Message';
 
 class Example extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
             id: ''
         }
     }
+
     render() {
         return (
             <div className="container">
@@ -21,8 +23,10 @@ class Example extends Component {
                             <div className="card-body">I'm an example component react whit realtime socket.io!</div>
                         </div>
     
-                        <div className="card">
-                            <Message user_id={this.props.id}/>
+                        <div className="card mt-3">
+                            <div className="card-body">
+                                <Message user_id={this.props.id}/>
+                            </div>
                         </div>
                     </div>
                 </div>
