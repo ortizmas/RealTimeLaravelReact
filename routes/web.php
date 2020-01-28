@@ -11,25 +11,31 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 // Route::get('/send', function () {
 //     broadcast(new \App\Events\SendMessage);
 //     return 'none';
 // });
+Route::middleware('auth')->group( function () {
+    Route::get('/', function () {
+        return view('welcome');
+    });
 
-Route::get('/messages', function () {
-    return view('message');
+    Route::get('/messages', function () {
+        $users = \App\User::get();
+        return view('message', compact('users'));
+    });
+
+    Route::post('/messages', function () {
+        $data = request()->input();
+        $message = \App\Message::create($data);
+        $user = \App\User::findOrFail($message->user_id);
+
+        //broadcast(new \App\Events\SendMessage($message)); //public
+        broadcast(new \App\Events\SendMessage($message, $user)); //private
+        return redirect('/messages');
+    });
 });
 
-Route::post('/messages', function () {
-    $data = request()->input();
-    $message = \App\Message::create($data);
-    broadcast(new \App\Events\SendMessage($message));
-    return redirect('/messages');
-});
 
 Auth::routes();
 
